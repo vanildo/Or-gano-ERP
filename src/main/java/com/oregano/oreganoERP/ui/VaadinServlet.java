@@ -1,4 +1,4 @@
-package com.oregano.vaadin;
+package com.oregano.oreganoERP.ui;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -14,11 +14,11 @@ public class VaadinServlet extends AbstractApplicationServlet {
 	private static final long serialVersionUID = 1L;
        
 	@Inject
-    MyVaadinApplication application;
+    OreganoErpApplication application;
 
     @Override
     protected Class<? extends Application> getApplicationClass() throws ClassNotFoundException {
-        return MyVaadinApplication.class;
+        return OreganoErpApplication.class;
     }
 
     @Override
