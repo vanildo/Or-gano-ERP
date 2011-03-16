@@ -1,5 +1,7 @@
 package com.oregano.oreganoERP.ui.windows;
 
+import com.oregano.oreganoERP.ui.OreganoErpApplication;
+import com.vaadin.terminal.ExternalResource;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.PasswordField;
@@ -17,6 +19,22 @@ public class LoginWindow extends Window {
 	public LoginWindow() {
 		super("Por favor autentique-se!");
 		setName("login");
+		btnLogin.addListener(new Button.ClickListener() {
+
+			private static final long serialVersionUID = 1L;
+
+			public void buttonClick(Button.ClickEvent event) {
+				try {
+					OreganoErpApplication.getInstance().authenticate(
+							(String) login.getValue(),
+							(String) password.getValue());
+					open(new ExternalResource(OreganoErpApplication
+							.getInstance().getURL()));
+				} catch (Exception e) {
+					showNotification(e.toString());
+				}
+			}
+		});
 		initUI();
 	}
 
