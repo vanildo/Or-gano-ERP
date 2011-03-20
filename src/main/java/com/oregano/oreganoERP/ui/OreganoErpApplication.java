@@ -1,69 +1,79 @@
 package com.oregano.oreganoERP.ui;
 
 import javax.enterprise.context.SessionScoped;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import com.oregano.oreganoERP.model.Usuario;
 import com.oregano.oreganoERP.ui.windows.ERPWindow;
 import com.oregano.oreganoERP.ui.windows.LoginWindow;
 import com.vaadin.Application;
-import com.vaadin.service.ApplicationContext;
+import com.vaadin.terminal.gwt.server.HttpServletRequestListener;
 
-/**
- * The Application's "main" class
- */
+
 @SuppressWarnings("serial")
 @SessionScoped
 public class OreganoErpApplication extends Application implements
-		ApplicationContext.TransactionListener {
+		HttpServletRequestListener {
 
 	private static ThreadLocal<OreganoErpApplication> currentApplication = new ThreadLocal<OreganoErpApplication>();
-	@SuppressWarnings("unused")
 	private Usuario usuario;
 
+	
 	@Override
 	public void init() {
-
+		
+		setInstance( this );
 		setMainWindow(new LoginWindow());
-
 	}
 
-	//TODO implementar a rotina de autenticacao real
+	//TODO implementar a rotina de autenticacao real e criar um exceção para a falha de login
 	public void authenticate(String login, String password) throws Exception {
-        if ( !"user".equals ( login ) && !password.equals ( "qwerty" ))
-        {
+
+		if ( !"user".equals ( login ) && !"qwerty".equals ( password )) {
             throw new Exception ("Login failed !");
         }
         
-        usuario = new Usuario();
+        this.usuario = new Usuario();
         loadProtectedResources();
 
 	}
 
 	private void loadProtectedResources() {
-
-		setMainWindow(new ERPWindow());
+		
+		currentApplication.get().setMainWindow(new ERPWindow());
+	}
+	
+	private static void setInstance(OreganoErpApplication application) {
+		if (getInstance() == null) { 			
+		      currentApplication.set(application); 		
+		    } 
+		
 	}
 
 	public static OreganoErpApplication getInstance() {
-		return currentApplication.get();
+		return (OreganoErpApplication) currentApplication.get();
 	}
 
 	@Override
-	public void transactionStart(Application application, Object transactionData) {
-
-		if (application == OreganoErpApplication.this) {
-			currentApplication.set(this);
-		}
-
+	public void onRequestStart(HttpServletRequest request,
+			HttpServletResponse response) {
+		
+		OreganoErpApplication.setInstance(this);
+		
 	}
 
 	@Override
-	public void transactionEnd(Application application, Object transactionData) {
-
-		if (application == OreganoErpApplication.this) {
-			currentApplication.set(null);
-			currentApplication.remove();
-		}
+	public void onRequestEnd(HttpServletRequest request,
+			HttpServletResponse response) {
+		
+		currentApplication.remove();
+		
 	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
 
 }

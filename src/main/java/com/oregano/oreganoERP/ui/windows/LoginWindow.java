@@ -25,9 +25,8 @@ public class LoginWindow extends Window {
 
 			public void buttonClick(Button.ClickEvent event) {
 				try {
-					OreganoErpApplication.getInstance().authenticate(
-							(String) login.getValue(),
-							(String) password.getValue());
+					OreganoErpApplication application = OreganoErpApplication.getInstance();
+					application.authenticate( (String) login.getValue(), (String) password.getValue());
 					open(new ExternalResource(OreganoErpApplication
 							.getInstance().getURL()));
 				} catch (Exception e) {

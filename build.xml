@@ -87,7 +87,7 @@
 
 		<copy todir="${deployDir}" overwrite="true">
 			<fileset dir="${buildErp}">
-				<include name="*.ear" />
+				<include name="*.war" />
 			</fileset>
 		</copy>
 

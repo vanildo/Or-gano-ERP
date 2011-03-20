@@ -9,11 +9,10 @@ public class ERPWindow extends Window {
 
 	private static final long serialVersionUID = 1L;
 
-	private Window window;
 
 	public ERPWindow() {
 
-		setName("My Vaadin Application");
+		setName("Oregano ERP :: Aplicação Principal");
 
 		Button button = new Button("Click Me");
 		button.addListener(new Button.ClickListener() {
@@ -21,9 +20,9 @@ public class ERPWindow extends Window {
 			private static final long serialVersionUID = 1L;
 
 			public void buttonClick(ClickEvent event) {
-				window.addComponent(new Label("Thank you for clicking"));
+				addComponent(new Label("Thank you for clicking"));
 			}
 		});
-		window.addComponent(button);
+		addComponent(button);
 	}
 }
