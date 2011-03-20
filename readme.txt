@@ -1,43 +1,17 @@
  oreganoERP
  ++++++++++++++++++++++++
 
- #Source archetype:# jboss-javaee6-webapp
+ 
 
  What is it?
  ===========
 
- This is your project! It's a sample, deployable Maven 2 project to help you
- get your foot in the door developing with Java EE 6. This project is setup to
- allow you to create a compliant Java EE 6 application using JSF 2.0, CDI 1.0,
- EJB 3.1, JPA 2.0 and Bean Validation 1.0) that can run on a certified
- application server (Full or Web Profile). It includes a persistence unit and
- some sample persistence and transaction code to help you get your feet wet
- with database access in enterprise Java. 
+
 
  System requirements
  ===================
 
- All you need to build this project is Java 5.0 (Java SDK 1.5) or better, Maven
- 2.0.10 or better. We strongly recommend, however, that you use Java 6.0 (Java
- SDK 1.6) and Maven 3.
 
- The application this project produces is designed to be run on a Java EE 6
- application server. We recommend JBoss AS 6.0.0.Final or GlassFish 3.1, though
- it should work on any server that is Java EE 6 compliant.
- 
- NOTE:
- This project retrieves artifacts from the JBoss Community Maven repository, a
- superset of the Maven central repository, because there are certain Java EE
- API JARs that are not published to Maven central (for details, see the JIRA
- https://jira.jboss.org/jira/browse/WELD-222). The integration testing
- framework used by the project, Arquillian, is also only available in the JBoss
- Community Maven repository.
-
- NOTE:
- Prior to JBoss AS 6.0.0.CR1, modifications were required to get JAX-RS working
- properly on JBoss AS. We strongly recommend upgrading to 6.0.0.Final.
-
- With the prerequisites out of the way, you're ready to build and deploy.
 
  Deploying the application
  =========================

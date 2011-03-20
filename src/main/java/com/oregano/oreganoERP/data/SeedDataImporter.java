@@ -24,7 +24,7 @@ import com.oregano.oreganoERP.model.Member;
  *
  * @author Dan Allen
  */
-@Startup
+//@Startup
 @Singleton
 public class SeedDataImporter
 {
