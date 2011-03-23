@@ -1,5 +1,7 @@
 package com.oregano.oreganoERP.ui.windows;
 
+import com.oregano.oreganoERP.ui.forms.ContatoForm;
+import com.oregano.oreganoERP.ui.forms.ContatoList;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Label;
@@ -24,5 +26,14 @@ public class ERPWindow extends Window {
 			}
 		});
 		addComponent(button);
+		
+		Label label = new Label("Bem-Vindo a agenda");
+
+		Button botao = new Button("Mostrar contatos");
+
+		addComponent(label);
+		addComponent(botao);
+		addComponent(new ContatoList());
+		addComponent(new ContatoForm(null));
 	}
 }
