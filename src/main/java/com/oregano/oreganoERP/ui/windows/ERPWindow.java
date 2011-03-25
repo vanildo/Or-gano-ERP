@@ -7,6 +7,7 @@ import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Window;
 
+
 public class ERPWindow extends Window {
 
 	private static final long serialVersionUID = 1L;
@@ -16,13 +17,13 @@ public class ERPWindow extends Window {
 
 		setName("Oregano ERP :: Aplicação Principal");
 
-		Button button = new Button("Click Me");
+		Button button = new Button("Clique aqui...");
 		button.addListener(new Button.ClickListener() {
 
 			private static final long serialVersionUID = 1L;
 
 			public void buttonClick(ClickEvent event) {
-				addComponent(new Label("Thank you for clicking"));
+				addComponent(new Label("Obrigado por Clicar"));
 			}
 		});
 		addComponent(button);
@@ -33,6 +34,8 @@ public class ERPWindow extends Window {
 
 		addComponent(label);
 		addComponent(botao);
+		
+		
 		addComponent(new ContatoList());
 		addComponent(new ContatoForm(null));
 	}

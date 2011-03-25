@@ -14,6 +14,7 @@ import com.oregano.oreganoERP.model.Contato;
 
 @Stateless
 public class ContatoRepositorio {
+	
 
 	@Inject
 	@Category("oreganoERP :: ContatoRepositorio")

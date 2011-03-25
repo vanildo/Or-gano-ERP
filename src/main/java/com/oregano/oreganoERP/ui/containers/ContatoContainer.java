@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.ejb.EJB;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 import org.jboss.logging.Logger;
@@ -14,6 +15,7 @@ import com.oregano.oreganoERP.model.Contato;
 import com.vaadin.data.util.BeanItemContainer;
 
 
+@Stateless
 public class ContatoContainer extends BeanItemContainer<Contato> implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -32,25 +34,15 @@ public class ContatoContainer extends BeanItemContainer<Contato> implements Seri
 
 	}
 
-	public ContatoContainer listarContatos () {
+	public ContatoContainer listarContatos() {
 
 		List<Contato> contatos = repositorio.todosContatos();
-		ContatoContainer container = null;
 
-		try {
-			container = new ContatoContainer();
-
-			for (Contato c : contatos) {
-				container.addBean(c);
-			}
-
-		} catch (InstantiationException e) {
-			logger.error("Problema instanciando o contexto inicial", e);
-		} catch (IllegalAccessException e) {
-			logger.error("Problema de Acesso Ilegal", e);
+		for (Contato c : contatos) {
+			this.addBean(c);
 		}
 
-		return container;
+		return this;
 	}
 
 }

@@ -1,31 +1,34 @@
 package com.oregano.oreganoERP.ui.forms;
 
+import org.jboss.logging.Logger;
+
 import com.oregano.oreganoERP.model.Contato;
 import com.oregano.oreganoERP.ui.containers.ContatoContainer;
+import com.oregano.oreganoERP.util.ServiceLocator;
 import com.vaadin.terminal.ExternalResource;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.Link;
 import com.vaadin.ui.Table;
 
 
-@SuppressWarnings("serial")
+
 public class ContatoList extends Table {
 
-	public ContatoList( ) {
+	private static final long serialVersionUID = 1L;
+	
+	ContatoContainer contatoContainer;
+	private Logger logger = Logger.getLogger(ContatoList.class);
+	
 
-		ContatoContainer cc = null;
-		try {
-			cc = new ContatoContainer();
-		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public ContatoList( ) {
+		
+		logger.info("entrando no contato list");
+		
+		contatoContainer = (ContatoContainer)  ServiceLocator.locate("java:module/ContatoContainer");
 
 		setSizeFull();
-		setContainerDataSource(cc.listarContatos());
+		logger.info("setando a datasource no contato list");
+		setContainerDataSource(contatoContainer.listarContatos());
 
 		setVisibleColumns(new String[] {"nome","email","telefone"});
         setColumnHeaders(new String[] { "Nome", "e-mail", "telefone" });
@@ -46,6 +49,9 @@ public class ContatoList extends Table {
 
 		// customize email column to have mailto: links using column generator
 		addGeneratedColumn("email", new ColumnGenerator() {
+
+			private static final long serialVersionUID = 1L;
+
 			public Component generateCell(Table source, Object itemId,
 					Object columnId) {
 				Contato c = (Contato) itemId;
