@@ -35,6 +35,8 @@ public class ContatoContainer extends BeanItemContainer<Contato> implements Seri
 	}
 
 	public ContatoContainer listarContatos() {
+		
+		logger.info("recuerando todos os contatos...");
 
 		List<Contato> contatos = repositorio.todosContatos();
 

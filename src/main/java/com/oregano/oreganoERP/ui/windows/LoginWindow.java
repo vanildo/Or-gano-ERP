@@ -17,8 +17,12 @@ public class LoginWindow extends Window {
 	private PasswordField password = new PasswordField("Senha: ");
 
 	public LoginWindow() {
+		
 		super("Por favor autentique-se!");
+		
+		setStyleName("blue");
 		setName("login");
+		
 		btnLogin.addListener(new Button.ClickListener() {
 
 			private static final long serialVersionUID = 1L;

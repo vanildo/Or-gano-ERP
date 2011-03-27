@@ -7,9 +7,12 @@ import javax.inject.Inject;
 import org.jboss.logging.Logger;
 import org.jboss.seam.solder.log.Category;
 
+import com.oregano.oreganoERP.data.ContatoRepositorio;
 import com.oregano.oreganoERP.model.Contato;
 import com.oregano.oreganoERP.model.Endereco;
 import com.oregano.oreganoERP.ui.OreganoErpApplication;
+import com.oregano.oreganoERP.ui.containers.ContatoContainer;
+import com.oregano.oreganoERP.util.ServiceLocator;
 import com.vaadin.data.Item;
 import com.vaadin.data.Validator;
 import com.vaadin.data.util.BeanItem;
@@ -40,9 +43,9 @@ public class ContatoForm extends VerticalLayout {
 	private Logger log;
 
     @SuppressWarnings("unchecked")
-	public ContatoForm(OreganoErpApplication erpApplication) {
+	public ContatoForm() {
 
-    	application = erpApplication;
+//    	OreganoErpApplication application = OreganoErpApplication.getInstance();
 
         contato = new Contato(); // a person POJO
         BeanItem contatoItem = new BeanItem(contato); // item from POJO
@@ -81,12 +84,11 @@ public class ContatoForm extends VerticalLayout {
                 try {
                     contatoForm.commit();
                     log.info("Salvando o contato " + contato.getNome());
-
-            		//IRepository<Contato> repositorio =  (IRepository<Contato>) ServiceLocator.locate("erp-ear/ContatoRepository/local");
-
             		contato.setEndereco(new Endereco());
             		contato.getEndereco().setNumero(12);
-                    //contato = repositorio.save(contato);
+//            		ContatoRepositorio repositorio = (ContatoRepositorio)  
+//            											ServiceLocator.locate("java:module/ContatoRepositorio");
+//                    contato = repositorio.save(contato);
                     //application.getContatos().addItem(contato);
 
                 } catch (Exception e) {

@@ -1,4 +1,4 @@
-package com.oregano.oreganoERP.ui.forms;
+package com.oregano.oreganoERP.ui.lists;
 
 import org.jboss.logging.Logger;
 

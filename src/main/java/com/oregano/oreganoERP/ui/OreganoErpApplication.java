@@ -8,8 +8,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.jboss.logging.Logger;
 import org.jboss.seam.solder.log.Category;
 
+import com.oregano.oreganoERP.data.EmpresaSingleton;
 import com.oregano.oreganoERP.data.UsuarioRepositorio;
 import com.oregano.oreganoERP.exceptions.InvalidLoginException;
+import com.oregano.oreganoERP.model.Empresa;
 import com.oregano.oreganoERP.model.Usuario;
 import com.oregano.oreganoERP.ui.windows.ERPWindow;
 import com.oregano.oreganoERP.ui.windows.LoginWindow;
@@ -27,13 +29,17 @@ public class OreganoErpApplication extends Application implements
 	private Logger log;
 	@Inject
 	private UsuarioRepositorio usuarioRepositorio;
+	@Inject
+	private EmpresaSingleton empresaSingleton;
 	private static ThreadLocal<OreganoErpApplication> currentApplication = new ThreadLocal<OreganoErpApplication>();
 	private Usuario usuario;
+	private Empresa empresa;
 
 	
 	@Override
 	public void init() {
 		
+		setTheme("ReindeerMods");
 		setInstance( this );
 		setMainWindow(new LoginWindow());
 	}
@@ -50,6 +56,7 @@ public class OreganoErpApplication extends Application implements
 
 	private void loadProtectedResources() {
 		
+		this.empresa = empresaSingleton.dadosDaEmpresa();
 		currentApplication.get().setMainWindow(new ERPWindow());
 	}
 	
@@ -82,6 +89,10 @@ public class OreganoErpApplication extends Application implements
 
 	public Usuario getUsuario() {
 		return usuario;
+	}
+
+	public Empresa getEmpresa() {
+		return this.empresa;
 	}
 
 
