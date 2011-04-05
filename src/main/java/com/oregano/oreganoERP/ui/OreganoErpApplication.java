@@ -5,6 +5,9 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.UsernamePasswordToken;
 import org.jboss.logging.Logger;
 import org.jboss.seam.solder.log.Category;
 
@@ -46,10 +49,18 @@ public class OreganoErpApplication extends Application implements
 
 	public void authenticate(String login, String senha) throws InvalidLoginException {
 		
-		Usuario usuario = usuarioRepositorio.autenticar(login, senha);
+//		Usuario usuario = usuarioRepositorio.autenticar(login, senha);
+		
+		UsernamePasswordToken token = new UsernamePasswordToken(login, senha, false);
+        try {
+            SecurityUtils.getSubject().login(token);
+        } catch (AuthenticationException e) {
+        	log.error("Tentativa de login invalida: ", e);
+           throw new InvalidLoginException();
+        }
         
 		log.info("Login efetuado com sucesso...");
-        this.usuario = usuario;
+        this.usuario = usuarioRepositorio.peloLogin(login);
         loadProtectedResources();
 
 	}

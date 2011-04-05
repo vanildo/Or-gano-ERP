@@ -48,15 +48,16 @@ public class ERPWindow extends Window {
 		verticalLayout.addComponent(conteudoPrincipal);
 		verticalLayout.setExpandRatio(conteudoPrincipal, 1);
 		
+		
 		addComponent(verticalLayout);
-//		
-//		Label label = new Label("Bem-Vindo a agenda");
-//
-//		Button botao = new Button("Mostrar contatos");
-//
-//		addComponent(label);
-//		addComponent(botao);
-//		
+		
+		Label label = new Label("Bem-Vindo a agenda");
+
+		Button botao = new Button("Mostrar contatos");
+
+		addComponent(label);
+		addComponent(botao);
+		
 //		addComponent(new ContatoForm());
 	}
 }

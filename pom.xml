@@ -122,8 +122,14 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
-			<version>4.0.0.GA</version>
+			<version>4.1.0.final</version>
 			<scope>provided</scope>
+<!-- 			<exclusions>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-api</artifactId>
+				</exclusion>
+			</exclusions> -->
 		</dependency>
 
 		<!-- Needed for running tests (you may also use TestNG) -->
@@ -159,6 +165,18 @@
 			<artifactId>beanvalidation-addon</artifactId>
 			<version>0.6.1</version>
 		</dependency> -->
+		<!-- Shiro Dependencies -->
+		<dependency>
+		    <groupId>org.apache.shiro</groupId>
+		    <artifactId>shiro-core</artifactId>
+		    <version>1.1.0</version>
+		    <exclusions>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-api</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -226,47 +244,6 @@
 								<!-- DataSource needs to go before the application -->
 								<fileName>${project.build.directory}/${project.build.finalName}.war</fileName>
 							</fileNames>
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-
-		<profile>
-			<!-- An optional Arquillian testing profile that executes tests in GlassFish 
-				Embedded -->
-			<!-- Run with 'mvn clean test -Parq-glassfish-embedded' -->
-			<id>arq-glassfish-embedded</id>
-			<dependencies>
-				<dependency>
-					<groupId>org.jboss.arquillian.container</groupId>
-					<artifactId>arquillian-glassfish-embedded-3</artifactId>
-					<version>${arquillian.version}</version>
-					<scope>test</scope>
-				</dependency>
-			</dependencies>
-			<build>
-				<testResources>
-					<testResource>
-						<directory>src/test/resources</directory>
-					</testResource>
-				</testResources>
-				<plugins>
-					<plugin>
-						<artifactId>maven-surefire-plugin</artifactId>
-						<!-- don't use version 2.5 as it creates seperate test suites per class -->
-						<version>2.4.3</version>
-						<configuration>
-							<systemProperties>
-								<!-- This optional property fixes an annoyance with Glassfish that 
-									puts derby.log in the project root -->
-								<property>
-									<name>derby.stream.error.file</name>
-									<!-- If you save the log in target it is less likely to get committed 
-										in your project -->
-									<value>target/derby.log</value>
-								</property>
-							</systemProperties>
 						</configuration>
 					</plugin>
 				</plugins>

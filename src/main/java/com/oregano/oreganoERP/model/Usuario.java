@@ -1,23 +1,25 @@
 package com.oregano.oreganoERP.model;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-@XmlRootElement
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = {"login","email"}))
 public class Usuario implements Serializable{
 
@@ -29,6 +31,7 @@ public class Usuario implements Serializable{
 	private String senha;
 	private Endereco endereco;
 	private Integer version;
+	private Set<Perfil> perfis = new HashSet<Perfil>();
 	
 	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -63,7 +66,7 @@ public class Usuario implements Serializable{
 		this.login = login;
 	}
 	
-	@NotNull @Size(min=6, max=15)
+	@NotNull @Size(max=40, min=40)
 	public String getSenha() {
 		return senha;
 	}
@@ -78,6 +81,15 @@ public class Usuario implements Serializable{
 		this.endereco = endereco;
 	}
 	
+	@ManyToMany
+    @JoinTable(name="usuarios_perfis")
+	public Set<Perfil> getPerfis() {
+		return perfis;
+	}
+	public void setPerfis(Set<Perfil> perfis) {
+		this.perfis = perfis;
+	}
+	
 	@Version
 	public Integer getVersion() {
 		return version;
@@ -85,5 +97,6 @@ public class Usuario implements Serializable{
 	public void setVersion(Integer version) {
 		this.version = version;
 	}
+	
 	
 }

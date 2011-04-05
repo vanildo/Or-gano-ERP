@@ -25,7 +25,7 @@ public class UsuarioRepositorio {
 	@EJB
 	UsuarioUtil usuarioUtil;
 
-	public Usuario autenticar(String login, String senha) throws InvalidLoginException {
+	public Usuario autenticar(final String login, final String senha) throws InvalidLoginException {
 
 		try {
 
@@ -45,5 +45,27 @@ public class UsuarioRepositorio {
 		}
 
 		return null;
+	}
+	
+	public Usuario porId (final Long id) {
+		
+		return em.find(Usuario.class, id);
+	}
+	
+	public Usuario peloLogin (final String login) {
+		
+		Usuario usuario;
+		try {
+
+			usuario = (Usuario) em.createQuery(
+					"from Usuario u where u.login='" + login + "'")
+					.getSingleResult();
+
+		} catch (NoResultException e) {
+			log.info("****** Usuario nao encontrado pelo Login: " + login);
+			return null;
+		}
+
+		return usuario;
 	}
 }
