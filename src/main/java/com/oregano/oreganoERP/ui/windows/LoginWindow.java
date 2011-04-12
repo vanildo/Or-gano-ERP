@@ -22,6 +22,7 @@ public class LoginWindow extends Window {
 		
 		setStyleName("blue");
 		setName("login");
+		setHeight(100,UNITS_PERCENTAGE);
 		
 		btnLogin.addListener(new Button.ClickListener() {
 

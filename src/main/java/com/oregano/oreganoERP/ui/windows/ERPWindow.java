@@ -23,6 +23,7 @@ public class ERPWindow extends Window {
 		
 		setStyleName("blue");
 		setName("Oregano ERP :: Aplicação Principal");
+		setHeight(100, UNITS_PERCENTAGE);
 		
 		Button button = new Button("Clique aqui...");
 		button.addListener(new Button.ClickListener() {
@@ -35,10 +36,11 @@ public class ERPWindow extends Window {
 		});
 		
 		toolbar.addComponent(button);
+		toolbar.setHeight(100,Sizeable.UNITS_PERCENTAGE);
 		
+		conteudoPrincipal.setHeight(100,Sizeable.UNITS_PERCENTAGE);
 		conteudoPrincipal.setSplitPosition(200, Sizeable.UNITS_PIXELS);
-		conteudoPrincipal.setHeight("100%");
-		conteudoPrincipal.setFirstComponent(button);
+		conteudoPrincipal.setFirstComponent(new ContatoList());
 		conteudoPrincipal.setSecondComponent(new ContatoList());
 		
 		
@@ -50,13 +52,6 @@ public class ERPWindow extends Window {
 		
 		
 		addComponent(verticalLayout);
-		
-		Label label = new Label("Bem-Vindo a agenda");
-
-		Button botao = new Button("Mostrar contatos");
-
-		addComponent(label);
-		addComponent(botao);
 		
 //		addComponent(new ContatoForm());
 	}
